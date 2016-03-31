@@ -8,8 +8,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class ClassList extends AppCompatActivity {
+
+    private void createButton(Lecture lecture) {
+        Button button = new Button(this);
+        button.setId(lecture.getID());
+        button.setText(lecture.getName());
+
+        LinearLayout ll = (LinearLayout)findViewById(R.id.ButtonLinearLayout);
+        ll.addView(button);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +28,11 @@ public class ClassList extends AppCompatActivity {
         setContentView(R.layout.activity_class_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // Temporary! Pull the Teacher values from the database
+        Teacher teacher = new Teacher("123", "Omar");
+        Lecture lecture = new Lecture(52, "CS 126");
+        createButton(lecture);
     }
 
     @Override
