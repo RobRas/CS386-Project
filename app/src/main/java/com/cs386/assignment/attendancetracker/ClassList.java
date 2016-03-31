@@ -1,5 +1,7 @@
 package com.cs386.assignment.attendancetracker;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +16,8 @@ import android.widget.LinearLayout;
 import java.util.LinkedList;
 
 public class ClassList extends AppCompatActivity {
+    public final static String LECTURE_ID_MESSAGE = "com.cs386.assignment.attendancetracker.CLASS_ID";
+    public final static String LECTURE_NAME_MESSAGE = "com.cs386.assignment.attendancetracker.CLASS_NAME";
 
     private void createButtons(LinkedList<Lecture> lectureList) {
         for (Lecture lecture : lectureList) {
@@ -21,10 +25,20 @@ public class ClassList extends AppCompatActivity {
         }
     }
 
-    private void createButton(Lecture lecture) {
+    private void createButton(final Lecture lecture) {
         Button button = new Button(this);
         button.setText(lecture.getName());
         button.setTag(lecture);
+
+        final Context context = this;
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ClassActivity.class);
+                intent.putExtra(LECTURE_ID_MESSAGE, lecture.getID());
+                intent.putExtra(LECTURE_NAME_MESSAGE, lecture.getName());
+                startActivity(intent);
+            }
+        });
 
         LinearLayout ll = (LinearLayout)findViewById(R.id.ButtonLinearLayout);
         ll.addView(button);
