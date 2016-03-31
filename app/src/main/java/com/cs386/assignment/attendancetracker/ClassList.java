@@ -11,12 +11,20 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import java.util.LinkedList;
+
 public class ClassList extends AppCompatActivity {
+
+    private void createButtons(LinkedList<Lecture> lectureList) {
+        for (Lecture lecture : lectureList) {
+            createButton(lecture);
+        }
+    }
 
     private void createButton(Lecture lecture) {
         Button button = new Button(this);
-        button.setId(lecture.getID());
         button.setText(lecture.getName());
+        button.setTag(lecture);
 
         LinearLayout ll = (LinearLayout)findViewById(R.id.ButtonLinearLayout);
         ll.addView(button);
@@ -31,8 +39,20 @@ public class ClassList extends AppCompatActivity {
 
         // Temporary! Pull the Teacher values from the database
         Teacher teacher = new Teacher("123", "Omar");
-        Lecture lecture = new Lecture(52, "CS 126");
-        createButton(lecture);
+
+        LinkedList<Lecture> lectureList = new LinkedList<Lecture>();
+
+        Lecture lecture0 = new Lecture("0", "CS 126");
+        Lecture lecture1 = new Lecture("1", "CS 126");
+        Lecture lecture2 = new Lecture("2", "CS 136");
+        Lecture lecture3 = new Lecture("3", "CS 200");
+
+        lectureList.add(lecture0);
+        lectureList.add(lecture1);
+        lectureList.add(lecture2);
+        lectureList.add(lecture3);
+
+        createButtons(lectureList);
     }
 
     @Override
