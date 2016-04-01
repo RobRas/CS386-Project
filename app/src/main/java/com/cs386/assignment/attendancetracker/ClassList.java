@@ -28,7 +28,6 @@ public class ClassList extends AppCompatActivity {
     private void createButton(final Lecture lecture) {
         Button button = new Button(this);
         button.setText(lecture.getName());
-        button.setTag(lecture);
 
         final Context context = this;
         button.setOnClickListener(new View.OnClickListener() {

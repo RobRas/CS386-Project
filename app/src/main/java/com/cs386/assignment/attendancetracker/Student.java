@@ -5,6 +5,7 @@ package com.cs386.assignment.attendancetracker;
  */
 public class Student extends Person {
     private String _macAddress;
+    private int _attendance;
 
     public Student(String id, String name, String macAddress) {
         super(id, name);
@@ -13,5 +14,13 @@ public class Student extends Person {
 
     public String getMacAddress() {
         return _macAddress;
+    }
+
+    public int getAttendance() {
+        return _attendance;
+    }
+
+    public void setAttendance(int value) {
+        _attendance = value;
     }
 }

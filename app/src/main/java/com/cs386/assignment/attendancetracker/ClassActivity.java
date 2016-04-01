@@ -10,6 +10,17 @@ import android.view.View;
 import android.widget.TextView;
 
 public class ClassActivity extends AppCompatActivity {
+    public final static String LECTURE_ID_MESSAGE = "com.cs386.assignment.attendancetracker.CLASS_ID";
+    public final static String LECTURE_NAME_MESSAGE = "com.cs386.assignment.attendancetracker.CLASS_NAME";
+
+    private Lecture lecture;
+
+    public void onClickShowAttendance(View view) {
+        Intent intent = new Intent(this, AttendanceListActivity.class);
+        intent.putExtra(LECTURE_ID_MESSAGE, lecture.getID());
+        intent.putExtra(LECTURE_NAME_MESSAGE, lecture.getName());
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +33,7 @@ public class ClassActivity extends AppCompatActivity {
 
         String lectureID = intent.getStringExtra(ClassList.LECTURE_ID_MESSAGE);
         String lectureName = intent.getStringExtra(ClassList.LECTURE_NAME_MESSAGE);
-        Lecture lecture = new Lecture(lectureID, lectureName);
+        lecture = new Lecture(lectureID, lectureName);
 
         TextView label = (TextView)findViewById(R.id.ClassName);
         label.setText(lecture.getName());
