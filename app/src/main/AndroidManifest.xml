@@ -21,6 +21,10 @@
         <activity
             android:name=".ClassActivity"
             android:label="@string/title_activity_class"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AttendanceListActivity"
+            android:label="@string/title_activity_attendance_list"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
