@@ -28,6 +28,7 @@ public class ClassActivity extends AppCompatActivity {
         setContentView(R.layout.activity_class);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Class");
 
         Intent intent = getIntent();
 

@@ -58,6 +58,7 @@ public class AttendanceListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_attendance_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Class Attendance");
 
         Intent intent = getIntent();
         String lectureID = intent.getStringExtra(ClassActivity.LECTURE_ID_MESSAGE);

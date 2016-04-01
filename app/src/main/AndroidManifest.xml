@@ -25,6 +25,10 @@
         <activity
             android:name=".AttendanceListActivity"
             android:label="@string/title_activity_attendance_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TrackingAttendanceActivity"
+            android:label="@string/title_activity_tracking_attendance"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

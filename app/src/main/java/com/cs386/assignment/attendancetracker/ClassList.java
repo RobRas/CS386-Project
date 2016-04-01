@@ -49,6 +49,7 @@ public class ClassList extends AppCompatActivity {
         setContentView(R.layout.activity_class_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Classes");
 
         // Temporary! Pull the Teacher values from the database
         Teacher teacher = new Teacher("123", "Omar");
