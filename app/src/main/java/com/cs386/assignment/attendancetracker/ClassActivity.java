@@ -15,6 +15,13 @@ public class ClassActivity extends AppCompatActivity {
 
     private Lecture lecture;
 
+    public void onClickTrackAttendance(View view) {
+        Intent intent = new Intent(this, TrackingAttendanceActivity.class);
+        intent.putExtra(LECTURE_ID_MESSAGE, lecture.getID());
+        intent.putExtra(LECTURE_NAME_MESSAGE, lecture.getName());
+        startActivity(intent);
+    }
+
     public void onClickShowAttendance(View view) {
         Intent intent = new Intent(this, AttendanceListActivity.class);
         intent.putExtra(LECTURE_ID_MESSAGE, lecture.getID());

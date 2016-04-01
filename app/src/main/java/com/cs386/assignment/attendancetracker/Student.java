@@ -6,6 +6,7 @@ package com.cs386.assignment.attendancetracker;
 public class Student extends Person {
     private String _macAddress;
     private int _attendance;
+    private boolean _inAttendance;
 
     public Student(String id, String name, String macAddress) {
         super(id, name);
@@ -23,4 +24,10 @@ public class Student extends Person {
     public void setAttendance(int value) {
         _attendance = value;
     }
+
+    public boolean getInAttendance() {
+        return _inAttendance;
+    }
+
+    public void setInAttendance(boolean value) { _inAttendance = value; }
 }

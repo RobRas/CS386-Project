@@ -34,7 +34,8 @@
             android:text="Track Attendance"
             android:id="@+id/button"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp" />
+            android:layout_marginTop="50dp"
+            android:onClick="onClickTrackAttendance" />
 
         <Button
             android:layout_width="200dp"
