@@ -44,14 +44,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Student Name"
-                    android:id="@+id/textView3" />
+                    android:id="@+id/textView3"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Attendance"
                     android:id="@+id/textView4"
-                    android:gravity="right" />
+                    android:gravity="right"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
