@@ -52,7 +52,7 @@ public class ClassList extends AppCompatActivity {
         getSupportActionBar().setTitle("Classes");
 
         // Temporary! Pull the Teacher values from the database
-        Teacher teacher = new Teacher("123", "Omar");
+        Teacher teacher = new Teacher("123", "Omar", "Badreldin");
 
         LinkedList<Lecture> lectureList = DatabaseManager.getLectures(teacher);
 

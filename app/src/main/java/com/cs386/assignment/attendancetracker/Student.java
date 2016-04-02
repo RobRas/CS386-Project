@@ -8,8 +8,8 @@ public class Student extends Person {
     private int _attendance;
     private boolean _inAttendance;
 
-    public Student(String id, String name, String macAddress) {
-        super(id, name);
+    public Student(String id, String firstName, String lastName, String macAddress) {
+        super(id, firstName, lastName);
         _macAddress = macAddress;
     }
 
