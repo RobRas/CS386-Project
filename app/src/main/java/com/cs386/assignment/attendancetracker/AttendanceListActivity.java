@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class AttendanceListActivity extends AppCompatActivity {
 
-    private void createAttendanceList(LinkedList<Student> studentList, Lecture lecture) {
+    private void createAttendanceList(ArrayList<Student> studentList, Lecture lecture) {
         studentList = DatabaseManager.getStudentAttendance(studentList, lecture);
         for (Student student : studentList) {
             createNewAttendance(student);
@@ -52,7 +52,7 @@ public class AttendanceListActivity extends AppCompatActivity {
 
         ((TextView)findViewById(R.id.attendanceListClassNameLabel)).setText(lecture.getName());
 
-        LinkedList<Student> studentList = DatabaseManager.getStudentsInLecture(lecture);
+        ArrayList<Student> studentList = DatabaseManager.getStudentsInLecture(lecture);
         createAttendanceList(studentList, lecture);
     }
 

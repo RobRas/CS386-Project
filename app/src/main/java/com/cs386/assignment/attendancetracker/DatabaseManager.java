@@ -3,7 +3,7 @@ package com.cs386.assignment.attendancetracker;
 import java.text.Collator;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -17,8 +17,8 @@ public final class DatabaseManager {
         // Static class, should never be instantiated
     }
 
-    public static LinkedList<Student> getStudentsInLecture(Lecture lecture) {
-        LinkedList<Student> studentList = new LinkedList<>();
+    public static ArrayList<Student> getStudentsInLecture(Lecture lecture) {
+        ArrayList<Student> studentList = new ArrayList<>();
 
         // Replace me with code that accesses the database
         studentList.add(new Student("0", "Robert", "Rasmussen", "00:11:22:33:AA:BB"));
@@ -38,7 +38,7 @@ public final class DatabaseManager {
         return studentList;
     }
 
-    public static LinkedList<Student> getStudentAttendance(LinkedList<Student> studentList, Lecture lecture) {
+    public static ArrayList<Student> getStudentAttendance(ArrayList<Student> studentList, Lecture lecture) {
         // Call setAttendance on each student for the given lecture
         Random random = new Random();
         for (Student student : studentList) {
@@ -48,7 +48,7 @@ public final class DatabaseManager {
         return studentList;
     }
 
-    public static void incrementStudentAttendance(LinkedList<Student> studentList, Lecture lecture) {
+    public static void incrementStudentAttendance(ArrayList<Student> studentList, Lecture lecture) {
         for (Student student : studentList) {
             if (student.getInAttendance()) {
                 // Increment student attendance in the database for the given lecture here
@@ -56,8 +56,8 @@ public final class DatabaseManager {
         }
     }
 
-    public static LinkedList<Lecture> getLectures(Teacher teacher) {
-        LinkedList<Lecture> lectureList = new LinkedList<>();
+    public static ArrayList<Lecture> getLectures(Teacher teacher) {
+        ArrayList<Lecture> lectureList = new ArrayList<>();
 
         // Replace me with code that accesses the database
         lectureList.add(new Lecture("0", "CS 126"));

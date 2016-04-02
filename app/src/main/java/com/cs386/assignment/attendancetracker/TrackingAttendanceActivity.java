@@ -12,13 +12,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class TrackingAttendanceActivity extends AppCompatActivity {
     private Lecture lecture;
 
-    private void createAttendanceList(LinkedList<Student> studentList) {
+    private void createAttendanceList(ArrayList<Student> studentList) {
         Random random = new Random();   // Remove me later!
         for (Student student : studentList) {
             // Bluetooth code goes here
@@ -60,7 +60,7 @@ public class TrackingAttendanceActivity extends AppCompatActivity {
 
         ((TextView)findViewById(R.id.trackingAttendanceClassNameLabel)).setText(lecture.getName());
 
-        LinkedList<Student> studentList = DatabaseManager.getStudentsInLecture(lecture);
+        ArrayList<Student> studentList = DatabaseManager.getStudentsInLecture(lecture);
 
         createAttendanceList(studentList);
     }

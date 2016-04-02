@@ -13,13 +13,13 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class ClassList extends AppCompatActivity {
     public final static String LECTURE_ID_MESSAGE = "com.cs386.assignment.attendancetracker.CLASS_ID";
     public final static String LECTURE_NAME_MESSAGE = "com.cs386.assignment.attendancetracker.CLASS_NAME";
 
-    private void createButtons(LinkedList<Lecture> lectureList) {
+    private void createButtons(ArrayList<Lecture> lectureList) {
         for (Lecture lecture : lectureList) {
             createButton(lecture);
         }
@@ -54,7 +54,7 @@ public class ClassList extends AppCompatActivity {
         // Temporary! Pull the Teacher values from the database
         Teacher teacher = new Teacher("123", "Omar", "Badreldin");
 
-        LinkedList<Lecture> lectureList = DatabaseManager.getLectures(teacher);
+        ArrayList<Lecture> lectureList = DatabaseManager.getLectures(teacher);
 
         createButtons(lectureList);
     }
