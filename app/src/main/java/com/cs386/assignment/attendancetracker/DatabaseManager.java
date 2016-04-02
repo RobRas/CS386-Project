@@ -1,6 +1,7 @@
 package com.cs386.assignment.attendancetracker;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 
 /*
@@ -27,6 +28,15 @@ public final class DatabaseManager {
         studentList.add(s2);
         studentList.add(s3);
         studentList.add(s4);
+
+        return studentList;
+    }
+
+    public static LinkedList<Student> getStudentAttendance(LinkedList<Student> studentList, Lecture lecture) {
+        Random random = new Random();
+        for (Student student : studentList) {
+            student.setAttendance(random.nextInt(5));
+        }
 
         return studentList;
     }

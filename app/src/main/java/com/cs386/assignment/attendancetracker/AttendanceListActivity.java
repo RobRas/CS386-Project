@@ -11,14 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.LinkedList;
-import java.util.Random;
 
 public class AttendanceListActivity extends AppCompatActivity {
 
-    private void createAttendanceList(LinkedList<Student> studentList) {
-        Random random = new Random();   // Remove me when implementing database
+    private void createAttendanceList(LinkedList<Student> studentList, Lecture lecture) {
+        studentList = DatabaseManager.getStudentAttendance(studentList, lecture);
         for (Student student : studentList) {
-            student.setAttendance(random.nextInt(5));   // Remove me whin implementing database
             createNewAttendance(student);
         }
     }
@@ -55,7 +53,7 @@ public class AttendanceListActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.attendanceListClassNameLabel)).setText(lecture.getName());
 
         LinkedList<Student> studentList = DatabaseManager.getStudentsInLecture(lecture);
-        createAttendanceList(studentList);
+        createAttendanceList(studentList, lecture);
     }
 
 }
