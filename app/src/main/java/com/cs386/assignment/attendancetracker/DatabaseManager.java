@@ -16,13 +16,17 @@ public final class DatabaseManager {
     public static LinkedList<Student> getStudentsInLecture(Lecture lecture) {
         LinkedList<Student> studentList = new LinkedList<>();
 
-        Student s1 = new Student("1", "Robert Rasmussen", "123");
-        Student s2 = new Student("2", "Don Speer", "456");
-        Student s3 = new Student("3", "Steven Massey", "789");
+        Student s0 = new Student("0", "Robert Rasmussen", "123");
+        Student s1 = new Student("1", "Don Speer", "456");
+        Student s2 = new Student("2", "Steven Massey", "789");
+        Student s3 = new Student("3", "Leila Harrison", "914");
+        Student s4 = new Student("4", "Zachary Patten", "524");
 
+        studentList.add(s0);
         studentList.add(s1);
         studentList.add(s2);
         studentList.add(s3);
+        studentList.add(s4);
 
         return studentList;
     }
