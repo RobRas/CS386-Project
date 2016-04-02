@@ -33,7 +33,7 @@ public class AttendanceListActivity extends AppCompatActivity {
         attendance.setGravity(Gravity.RIGHT);
         ll.addView(attendance);
 
-        ((LinearLayout)findViewById(R.id.attendanceLayout)).addView(ll);
+        ((LinearLayout)findViewById(R.id.attendanceListLayout)).addView(ll);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class AttendanceListActivity extends AppCompatActivity {
         String lectureName = intent.getStringExtra(ClassActivity.LECTURE_NAME_MESSAGE);
         Lecture lecture = new Lecture(lectureID, lectureName);
 
-        ((TextView)findViewById(R.id.classNameText)).setText(lecture.getName());
+        ((TextView)findViewById(R.id.attendanceListClassNameLabel)).setText(lecture.getName());
 
         LinkedList<Student> studentList = DatabaseManager.getStudentsInLecture(lecture);
         createAttendanceList(studentList);

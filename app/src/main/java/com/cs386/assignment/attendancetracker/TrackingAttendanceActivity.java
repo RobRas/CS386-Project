@@ -42,7 +42,7 @@ public class TrackingAttendanceActivity extends AppCompatActivity {
         attendance.setGravity(Gravity.RIGHT);
         ll.addView(attendance);
 
-        ((LinearLayout)findViewById(R.id.attendanceTrackingLayout)).addView(ll);
+        ((LinearLayout)findViewById(R.id.trackingAttendanceLayout)).addView(ll);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class TrackingAttendanceActivity extends AppCompatActivity {
         String lectureName = intent.getStringExtra(ClassActivity.LECTURE_NAME_MESSAGE);
         lecture = new Lecture(lectureID, lectureName);
 
-        ((TextView)findViewById(R.id.classNameLabel)).setText(lecture.getName());
+        ((TextView)findViewById(R.id.trackingAttendanceClassNameLabel)).setText(lecture.getName());
 
         LinkedList<Student> studentList = DatabaseManager.getStudentsInLecture(lecture);
 

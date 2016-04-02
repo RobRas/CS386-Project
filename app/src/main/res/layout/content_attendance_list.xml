@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Error"
-        android:id="@+id/classNameText"
+        android:id="@+id/attendanceListClassNameLabel"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/scrollView2"
-        android:layout_below="@+id/classNameText"
+        android:layout_below="@+id/attendanceListClassNameLabel"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true">
 
@@ -33,7 +33,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/attendanceLayout">
+            android:id="@+id/attendanceListLayout">
 
             <LinearLayout
                 android:orientation="horizontal"

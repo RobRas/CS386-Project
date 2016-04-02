@@ -39,7 +39,7 @@ public class ClassList extends AppCompatActivity {
             }
         });
 
-        LinearLayout ll = (LinearLayout)findViewById(R.id.ButtonLinearLayout);
+        LinearLayout ll = (LinearLayout)findViewById(R.id.classListButtonLayout);
         ll.addView(button);
     }
 

@@ -43,7 +43,7 @@ public class ClassActivity extends AppCompatActivity {
         String lectureName = intent.getStringExtra(ClassList.LECTURE_NAME_MESSAGE);
         lecture = new Lecture(lectureID, lectureName);
 
-        TextView label = (TextView)findViewById(R.id.ClassName);
+        TextView label = (TextView)findViewById(R.id.classLectureName);
         label.setText(lecture.getName());
     }
 

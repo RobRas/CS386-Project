@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Error"
-            android:id="@+id/ClassName"
+            android:id="@+id/classLectureName"
             android:layout_gravity="center_horizontal" />
 
         <Button
