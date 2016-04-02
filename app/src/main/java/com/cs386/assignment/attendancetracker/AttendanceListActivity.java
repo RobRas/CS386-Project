@@ -20,22 +20,6 @@ public class AttendanceListActivity extends AppCompatActivity {
         }
     }
 
-    private LinkedList<Student> getStudents(Lecture lecture) {  // Lecture param for database lookup. Unused currently
-        LinkedList<Student> studentList = new LinkedList<Student>();
-
-        Student s1 = new Student("1", "Robert Rasmussen", "123");
-        s1.setAttendance(5);
-        studentList.add(s1);
-        Student s2 = new Student("2", "Don Speer", "456");
-        s2.setAttendance(4);
-        studentList.add(s2);
-        Student s3 = new Student("3", "Steven Massey", "789");
-        s3.setAttendance(2);
-        studentList.add(s3);
-
-        return studentList;
-    }
-
     private void createNewAttendance(Student student) {
         LinearLayout ll = new LinearLayout(this);
 
@@ -67,7 +51,7 @@ public class AttendanceListActivity extends AppCompatActivity {
 
         ((TextView)findViewById(R.id.classNameText)).setText(lecture.getName());
 
-        LinkedList<Student> studentList = getStudents(lecture);
+        LinkedList<Student> studentList = DatabaseManager.getStudentsInLecture(lecture);
         createAttendanceList(studentList);
     }
 

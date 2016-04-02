@@ -54,17 +54,7 @@ public class ClassList extends AppCompatActivity {
         // Temporary! Pull the Teacher values from the database
         Teacher teacher = new Teacher("123", "Omar");
 
-        LinkedList<Lecture> lectureList = new LinkedList<Lecture>();
-
-        Lecture lecture0 = new Lecture("0", "CS 126");
-        Lecture lecture1 = new Lecture("1", "CS 126");
-        Lecture lecture2 = new Lecture("2", "CS 136");
-        Lecture lecture3 = new Lecture("3", "CS 200");
-
-        lectureList.add(lecture0);
-        lectureList.add(lecture1);
-        lectureList.add(lecture2);
-        lectureList.add(lecture3);
+        LinkedList<Lecture> lectureList = DatabaseManager.getLectures(teacher);
 
         createButtons(lectureList);
     }

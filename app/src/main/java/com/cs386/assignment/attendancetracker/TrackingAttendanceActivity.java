@@ -13,29 +13,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 public class TrackingAttendanceActivity extends AppCompatActivity {
+    private Lecture lecture;
 
     private void createAttendanceList(LinkedList<Student> studentList) {
+        Random random = new Random();   // Remove me later!
         for (Student student : studentList) {
+            // Bluetooth code goes here
+            student.setInAttendance(random.nextBoolean());  // Remove me later!
             createNewAttendance(student);
         }
-    }
 
-    private LinkedList<Student> getStudents(Lecture lecture) {  // Lecture param for database lookup. Unused currently
-        LinkedList<Student> studentList = new LinkedList<Student>();
-
-        Student s1 = new Student("1", "Robert Rasmussen", "123");
-        s1.setInAttendance(true);
-        studentList.add(s1);
-        Student s2 = new Student("2", "Don Speer", "456");
-        s2.setInAttendance(false);
-        studentList.add(s2);
-        Student s3 = new Student("3", "Steven Massey", "789");
-        s3.setInAttendance(true);
-        studentList.add(s3);
-
-        return studentList;
+        DatabaseManager.incrementStudentAttendance(studentList, lecture);
     }
 
     private void createNewAttendance(Student student) {
@@ -65,11 +56,11 @@ public class TrackingAttendanceActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String lectureID = intent.getStringExtra(ClassActivity.LECTURE_ID_MESSAGE);
         String lectureName = intent.getStringExtra(ClassActivity.LECTURE_NAME_MESSAGE);
-        Lecture lecture = new Lecture(lectureID, lectureName);
+        lecture = new Lecture(lectureID, lectureName);
 
         ((TextView)findViewById(R.id.classNameLabel)).setText(lecture.getName());
 
-        LinkedList<Student> studentList = getStudents(lecture);
+        LinkedList<Student> studentList = DatabaseManager.getStudentsInLecture(lecture);
 
         createAttendanceList(studentList);
     }
