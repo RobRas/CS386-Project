@@ -17,17 +17,11 @@ public final class DatabaseManager {
     public static LinkedList<Student> getStudentsInLecture(Lecture lecture) {
         LinkedList<Student> studentList = new LinkedList<>();
 
-        Student s0 = new Student("0", "Robert Rasmussen", "123");
-        Student s1 = new Student("1", "Don Speer", "456");
-        Student s2 = new Student("2", "Steven Massey", "789");
-        Student s3 = new Student("3", "Leila Harrison", "914");
-        Student s4 = new Student("4", "Zachary Patten", "524");
-
-        studentList.add(s0);
-        studentList.add(s1);
-        studentList.add(s2);
-        studentList.add(s3);
-        studentList.add(s4);
+        studentList.add(new Student("0", "Robert Rasmussen", "123"));
+        studentList.add(new Student("1", "Don Speer", "456"));
+        studentList.add(new Student("2", "Steven Massey", "789"));
+        studentList.add(new Student("3", "Leila Harrison", "914"));
+        studentList.add(new Student("4", "Zachary Patten", "524"));
 
         return studentList;
     }
@@ -52,15 +46,10 @@ public final class DatabaseManager {
     public static LinkedList<Lecture> getLectures(Teacher teacher) {
         LinkedList<Lecture> lectureList = new LinkedList<>();
 
-        Lecture lecture0 = new Lecture("0", "CS 126");
-        Lecture lecture1 = new Lecture("1", "CS 126");
-        Lecture lecture2 = new Lecture("2", "CS 136");
-        Lecture lecture3 = new Lecture("3", "CS 200");
-
-        lectureList.add(lecture0);
-        lectureList.add(lecture1);
-        lectureList.add(lecture2);
-        lectureList.add(lecture3);
+        lectureList.add(new Lecture("0", "CS 126"));
+        lectureList.add(new Lecture("1", "CS 126"));
+        lectureList.add(new Lecture("2", "CS 136"));
+        lectureList.add(new Lecture("3", "CS 200"));
 
         return lectureList;
     }
