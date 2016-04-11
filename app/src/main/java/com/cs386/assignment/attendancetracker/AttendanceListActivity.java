@@ -1,5 +1,6 @@
 package com.cs386.assignment.attendancetracker;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class AttendanceListActivity extends AppCompatActivity {
 
     private void createAttendanceList(ArrayList<Student> studentList, Lecture lecture) {
-        studentList = DatabaseManager.getStudentAttendance(studentList, lecture);
+        studentList = DatabaseManager.getInstance().getStudentAttendance(studentList, lecture);
         for (Student student : studentList) {
             createNewAttendance(student);
         }
@@ -51,7 +52,26 @@ public class AttendanceListActivity extends AppCompatActivity {
 
         ((TextView)findViewById(R.id.attendanceListClassNameLabel)).setText(lecture.getName());
 
-        ArrayList<Student> studentList = DatabaseManager.getStudentsInLecture(lecture);
+        /*
+        final ProgressDialog ring = new ProgressDialog(this);
+        ring.setTitle("Please wait...");
+        ring.setMessage("Accessing Database...");
+        ring.show();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(10000);
+                } catch (Exception e) {
+
+                }
+                ring.dismiss();
+            }
+        }).start();
+        */
+
+        ArrayList<Student> studentList = DatabaseManager.getInstance().getStudentsInLecture(this, lecture);
         createAttendanceList(studentList, lecture);
     }
 

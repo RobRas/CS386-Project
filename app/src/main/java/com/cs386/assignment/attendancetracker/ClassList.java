@@ -52,7 +52,7 @@ public class ClassList extends AppCompatActivity {
         // Temporary! Pull the Teacher values from the database
         Teacher teacher = new Teacher("123", "Omar", "Badreldin");
 
-        ArrayList<Lecture> lectureList = DatabaseManager.getLectures(teacher);
+        ArrayList<Lecture> lectureList = DatabaseManager.getInstance().getLectures(teacher);
 
         createButtons(lectureList);
     }
