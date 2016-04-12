@@ -12,12 +12,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.text.Collator;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 
 /*
@@ -127,6 +135,26 @@ public final class DatabaseManager {
             result = "";
             try {
                 URL databaseURL = new URL("https://mygeeto.cefns.nau.edu/attendance/query.php?q=" + query);
+
+                // This is RIDICULOUSLY insecure code. Fix me up if there's time.
+                SSLContext sc = SSLContext.getInstance("SSL");
+                TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+                    public X509Certificate[] getAcceptedIssuers() {
+                        return null;
+                    }
+                    @Override
+                    public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                        return;
+                    }
+                    @Override
+                    public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                        return;
+                    }
+                } };
+                sc.init(null, trustAllCerts, new SecureRandom());
+
+                HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+
                 BufferedReader in = new BufferedReader(new InputStreamReader(databaseURL.openStream()));
                 String inputLine;
                 StringBuffer sb = new StringBuffer();
@@ -137,9 +165,6 @@ public final class DatabaseManager {
 
                 in.close();
                 result = sb.toString();
-                progress.setProgress(100);
-
-                //Thread.sleep(5000);
             } catch(Exception e) {
                 Log.e("ERROR", e.toString());
             }
