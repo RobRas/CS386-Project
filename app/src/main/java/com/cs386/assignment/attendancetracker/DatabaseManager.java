@@ -66,29 +66,12 @@ public final class DatabaseManager {
         String[] s = parseHTML(result).split("<td>");
         for (int i = 0; i < s.length; i++) {
             s[i] = s[i].replace("</td>", "");
-            Log.d("Parse", s[i]);
         }
-        for (int i = 0; i < s.length - 1; i += 3) {
+        for (int i = 1; i < s.length; i += 3) { // s[0] is ""
             studentList.add(new Student(s[i], s[i+1], s[i+2]));
         }
 
-        return studentList;
-    }
-
-
-
-/*
-    public static ArrayList<Student> getStudentsInLecture(Context context, Lecture lecture) {
-        ArrayList<Student> studentList = new ArrayList<>();
-
-        // Replace me with code that accesses the database
-        studentList.add(new Student("0", "Robert", "Rasmussen", "00:11:22:33:AA:BB"));
-        studentList.add(new Student("1", "Don", "Speer", "44:55:66:77:CC:DD"));
-        studentList.add(new Student("2", "Steven", "Massey", "88:99:11:22:EE:FF"));
-        studentList.add(new Student("3", "Leila", "Harrison", "22:33:44:77:AA:BB"));
-        studentList.add(new Student("4", "Zachary", "Patten", "55:66:77:33:CC:DD"));
-
-        // Sorts the list by last name. Keep me!
+        // Sorts list by last name.
         Collections.sort(studentList, new Comparator<Student>() {
             @Override
             public int compare(Student s1, Student s2) {
@@ -98,8 +81,6 @@ public final class DatabaseManager {
 
         return studentList;
     }
-    */
-
 
     public static ArrayList<Student> getStudentAttendance(ArrayList<Student> studentList, Lecture lecture) {
         // Call setAttendance on each student for the given lecture
@@ -144,6 +125,9 @@ public final class DatabaseManager {
 
         public AccessDatabaseThread(String query) {
             this.query = query.replace(" ", "%20");
+            this.query = this.query.replace("'", "%27");
+            this.query = this.query.replace(";", "%3B");
+            this.query = this.query.replace(",", "%2C");
         }
 
         @Override

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -25,6 +26,10 @@ public class AttendanceListActivity extends AppCompatActivity {
 
     private void createNewAttendance(Student student) {
         LinearLayout ll = new LinearLayout(this);
+
+        Log.d("Student ID:", student.getID());
+        Log.d("Student Fname:", student.getFirstName());
+        Log.d("Student Lname:", student.getLastName());
 
         TextView studentName = new TextView(this);
         studentName.setText(student.getName());
