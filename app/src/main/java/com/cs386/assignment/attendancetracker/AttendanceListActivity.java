@@ -27,10 +27,6 @@ public class AttendanceListActivity extends AppCompatActivity {
     private void createNewAttendance(Student student) {
         LinearLayout ll = new LinearLayout(this);
 
-        Log.d("Student ID:", student.getID());
-        Log.d("Student Fname:", student.getFirstName());
-        Log.d("Student Lname:", student.getLastName());
-
         TextView studentName = new TextView(this);
         studentName.setText(student.getName());
         ll.addView(studentName);

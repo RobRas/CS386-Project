@@ -40,6 +40,28 @@ public final class DatabaseManager {
 
     private DatabaseManager() {
         // Static class, should never be instantiated
+
+        try {
+            // This is RIDICULOUSLY insecure code. Fix me up if there's time.
+            SSLContext sc = SSLContext.getInstance("SSL");
+            TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+                public X509Certificate[] getAcceptedIssuers() {
+                    return null;
+                }
+
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                    return;
+                }
+
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                    return;
+                }
+            }};
+            sc.init(null, trustAllCerts, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+        } catch (Exception e) { }
     }
 
     public static DatabaseManager getInstance() { return _instance; }
@@ -135,25 +157,6 @@ public final class DatabaseManager {
             StringBuffer sb = new StringBuffer();
             try {
                 URL databaseURL = new URL("https://mygeeto.cefns.nau.edu/attendance/query.php?q=" + query);
-
-                // This is RIDICULOUSLY insecure code. Fix me up if there's time.
-                SSLContext sc = SSLContext.getInstance("SSL");
-                TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
-                    public X509Certificate[] getAcceptedIssuers() {
-                        return null;
-                    }
-                    @Override
-                    public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-                        return;
-                    }
-                    @Override
-                    public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-                        return;
-                    }
-                } };
-                sc.init(null, trustAllCerts, new SecureRandom());
-
-                HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(databaseURL.openStream()));
                 String inputLine;
