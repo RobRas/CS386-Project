@@ -23,7 +23,7 @@ public class TrackingAttendanceActivity extends AppCompatActivity {
             createNewAttendance(student);
         }
 
-        DatabaseManager.getInstance().incrementStudentAttendance(studentList, lecture);
+        DatabaseManager.incrementStudentAttendance(studentList, lecture);
     }
 
     private void createNewAttendance(Student student) {
@@ -57,7 +57,7 @@ public class TrackingAttendanceActivity extends AppCompatActivity {
 
         ((TextView)findViewById(R.id.trackingAttendanceClassNameLabel)).setText(lecture.getName());
 
-        ArrayList<Student> studentList = DatabaseManager.getInstance().getStudentsInLecture(this, lecture);
+        ArrayList<Student> studentList = DatabaseManager.getInstance().getStudentsInLecture(lecture);
 
         createAttendanceList(studentList);
     }

@@ -5,13 +5,16 @@ public class Student extends Person {
     private int _attendance;
     private boolean _inAttendance;
 
-    public Student(String id, String firstName, String lastName, String macAddress) {
+    public Student(String id, String firstName, String lastName) {
         super(id, firstName, lastName);
-        _macAddress = macAddress;
     }
 
     public String getMacAddress() {
         return _macAddress;
+    }
+
+    public void setMacAddress(String macAddress) {
+        _macAddress = macAddress;
     }
 
     public int getAttendance() {

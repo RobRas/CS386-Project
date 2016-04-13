@@ -3,6 +3,7 @@ package com.cs386.assignment.attendancetracker;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -14,8 +15,9 @@ import java.util.ArrayList;
 
 public class AttendanceListActivity extends AppCompatActivity {
 
-    private void createAttendanceList(ArrayList<Student> studentList, Lecture lecture) {
-        studentList = DatabaseManager.getInstance().getStudentAttendance(studentList, lecture);
+    private ProgressDialog progress;
+
+    private void showList(ArrayList<Student> studentList) {
         for (Student student : studentList) {
             createNewAttendance(student);
         }
@@ -52,27 +54,15 @@ public class AttendanceListActivity extends AppCompatActivity {
 
         ((TextView)findViewById(R.id.attendanceListClassNameLabel)).setText(lecture.getName());
 
-        /*
-        final ProgressDialog ring = new ProgressDialog(this);
-        ring.setTitle("Please wait...");
-        ring.setMessage("Accessing Database...");
-        ring.show();
+        progress = new ProgressDialog(this);
+        progress.setTitle("Please Wait...");
+        progress.setMessage("Accessing Database...");
+        progress.setCancelable(true);
+        progress.show();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(10000);
-                } catch (Exception e) {
+        showList(DatabaseManager.getInstance().getStudentsInLecture(lecture));
 
-                }
-                ring.dismiss();
-            }
-        }).start();
-        */
-
-        ArrayList<Student> studentList = DatabaseManager.getInstance().getStudentsInLecture(this, lecture);
-        createAttendanceList(studentList, lecture);
+        progress.dismiss();
     }
 
 }
