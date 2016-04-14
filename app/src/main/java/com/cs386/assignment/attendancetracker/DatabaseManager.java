@@ -70,24 +70,25 @@ public final class DatabaseManager {
 
         String[] studentIDs = parseHTML(result);
 
-        StringBuilder conditions = new StringBuilder();
         if (studentIDs.length > 0) {
+            StringBuilder conditions = new StringBuilder();
             conditions.append("student_id = '" + studentIDs[1] + "'");
-        }
-        for (int i = 1; i < studentIDs.length; i++) {
-            conditions.append(" OR ");
-            conditions.append("student_id = '" + studentIDs[i] + "'");
-        }
+            for (int i = 1; i < studentIDs.length; i++) {
+                conditions.append(" OR ");
+                conditions.append("student_id = '" + studentIDs[i] + "'");
+            }
 
-        t = new AccessDatabaseThread("select * from student where " + conditions.toString());
-        t.start();
-        try {
-            t.join();
-        } catch (InterruptedException e) { }
+            t = new AccessDatabaseThread("select * from student where " + conditions.toString());
+            t.start();
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+            }
 
-        String[] s = parseHTML(result);
-        for (int i = 1; i < s.length; i += 3) { // s[0] is ""
-            studentList.add(new Student(s[i], s[i+1], s[i+2]));
+            String[] s = parseHTML(result);
+            for (int i = 1; i < s.length; i += 3) { // s[0] is ""
+                studentList.add(new Student(s[i], s[i + 1], s[i + 2]));
+            }
         }
 
         // Sorts list by last name.
@@ -101,7 +102,7 @@ public final class DatabaseManager {
         return studentList;
     }
 
-    public void setStudentAttendance(ArrayList<Student> studentList, Lecture lecture) {
+    public void getStudentAttendance(ArrayList<Student> studentList, Lecture lecture) {
         // Call setAttendance on each student for the given lecture
         Thread t = new AccessDatabaseThread("select student_id, days_attended from student_enrollment where class_id = '" + lecture.getID() + "'");
         t.start();
@@ -127,6 +128,21 @@ public final class DatabaseManager {
                 try {
                     t.join();
                 } catch (InterruptedException e) { }
+            }
+        }
+    }
+
+    public void getMacAddresses(ArrayList<Student> studentList) {
+        for (Student student : studentList) {
+            Thread t = new AccessDatabaseThread("select * from mac where student_id = '" + student.getID() + "'");
+            t.start();
+            try {
+                t.join();
+            } catch (InterruptedException e) { }
+
+            String[] s = parseHTML(result);
+            for (int i = 3; i < s.length; i += 3) {
+                student.addMacAddress(s[i]);
             }
         }
     }

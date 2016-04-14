@@ -1,20 +1,23 @@
 package com.cs386.assignment.attendancetracker;
 
+import java.util.ArrayList;
+
 public class Student extends Person {
-    private String _macAddress;
+    private ArrayList<String> _macAddresses;
     private int _attendance;
     private boolean _inAttendance;
 
     public Student(String id, String firstName, String lastName) {
         super(id, firstName, lastName);
+        _macAddresses = new ArrayList<>();
     }
 
-    public String getMacAddress() {
-        return _macAddress;
+    public ArrayList<String> getMacAddresses() {
+        return _macAddresses;
     }
 
-    public void setMacAddress(String macAddress) {
-        _macAddress = macAddress;
+    public void addMacAddress(String macAddress) {
+        _macAddresses.add(macAddress);
     }
 
     public int getAttendance() {

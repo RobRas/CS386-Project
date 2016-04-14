@@ -62,7 +62,7 @@ public class AttendanceListActivity extends AppCompatActivity {
         progress.show();
 
         ArrayList<Student> studentList = DatabaseManager.getInstance().getStudentsInLecture(lecture);
-        DatabaseManager.getInstance().setStudentAttendance(studentList, lecture);
+        DatabaseManager.getInstance().getStudentAttendance(studentList, lecture);
         showList(studentList);
 
         progress.dismiss();
