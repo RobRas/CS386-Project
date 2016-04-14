@@ -66,29 +66,34 @@ public final class DatabaseManager {
 
     public static DatabaseManager getInstance() { return _instance; }
 
-    public static String parseHTML(String html) {
-        html = html.replaceAll("\t", "");
-        html = html.replaceAll("<table>", "");
-        html = html.replaceAll("</table>", "");
-        html = html.replaceAll("<tr>", "");
-        html = html.replaceAll("</tr>", "");
-
-        return html;
-    }
-
     public ArrayList<Student> getStudentsInLecture(Lecture lecture) {
         ArrayList<Student> studentList = new ArrayList<>();
 
-        Thread t = new AccessDatabaseThread("select * from student");
+        // Get student IDs
+        Thread t = new AccessDatabaseThread("select student_id from student_enrollment where class_id = '" + lecture.getID() + "'");
         t.start();
         try {
             t.join();
         } catch (InterruptedException e) { }
 
-        String[] s = parseHTML(result).split("<td>");
-        for (int i = 0; i < s.length; i++) {
-            s[i] = s[i].replace("</td>", "");
+        String[] studentIDs = parseHTML(result);
+
+        StringBuilder conditions = new StringBuilder();
+        if (studentIDs.length > 0) {
+            conditions.append("student_id = '" + studentIDs[1] + "'");
         }
+        for (int i = 1; i < studentIDs.length; i++) {
+            conditions.append(" OR ");
+            conditions.append("student_id = '" + studentIDs[i] + "'");
+        }
+
+        t = new AccessDatabaseThread("select * from student where " + conditions.toString());
+        t.start();
+        try {
+            t.join();
+        } catch (InterruptedException e) { }
+
+        String[] s = parseHTML(result);
         for (int i = 1; i < s.length; i += 3) { // s[0] is ""
             studentList.add(new Student(s[i], s[i+1], s[i+2]));
         }
@@ -122,16 +127,21 @@ public final class DatabaseManager {
         }
     }
 
-    public static ArrayList<Lecture> getLectures(Teacher teacher) {
+    public ArrayList<Lecture> getLectures(Teacher teacher) {
         ArrayList<Lecture> lectureList = new ArrayList<>();
 
-        // Replace me with code that accesses the database
-        lectureList.add(new Lecture("0", "CS 126"));
-        lectureList.add(new Lecture("1", "CS 126"));
-        lectureList.add(new Lecture("2", "CS 136"));
-        lectureList.add(new Lecture("3", "CS 200"));
+        Thread t = new AccessDatabaseThread("select * from class");
+        t.start();
+        try {
+            t.join();
+        } catch (InterruptedException e) { }
 
-        // Sorts the list by class name. Keep me!
+        String[] s = parseHTML(result);
+        for (int i = 1; i < s.length; i += 2) { // s[0] is ""
+            lectureList.add(new Lecture(s[i], s[i+1]));
+        }
+
+        // Sorts list by lecture name
         Collections.sort(lectureList, new Comparator<Lecture>() {
             @Override
             public int compare(Lecture l1, Lecture l2) {
@@ -142,6 +152,22 @@ public final class DatabaseManager {
         return lectureList;
     }
 
+    private String[] parseHTML(String html) {
+        html = html.replaceAll("\t", "");
+        html = html.replaceAll("<table>", "");
+        html = html.replaceAll("</table>", "");
+        html = html.replaceAll("<tr>", "");
+        html = html.replaceAll("</tr>", "");
+
+        String[] s = html.split("<td>");
+        for (int i = 0; i < s.length; i++) {
+            s[i] = s[i].replace("</td>", "");
+        }
+
+        return s;
+    }
+
+
     private class AccessDatabaseThread extends Thread {
         String query;
 
@@ -150,6 +176,7 @@ public final class DatabaseManager {
             this.query = this.query.replace("'", "%27");
             this.query = this.query.replace(";", "%3B");
             this.query = this.query.replace(",", "%2C");
+            this.query = this.query.replace("=", "%3D");
         }
 
         @Override
