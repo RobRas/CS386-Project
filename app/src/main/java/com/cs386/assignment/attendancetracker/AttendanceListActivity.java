@@ -61,7 +61,9 @@ public class AttendanceListActivity extends AppCompatActivity {
         progress.setCancelable(true);
         progress.show();
 
-        showList(DatabaseManager.getInstance().getStudentsInLecture(lecture));
+        ArrayList<Student> studentList = DatabaseManager.getInstance().getStudentsInLecture(lecture);
+        DatabaseManager.getInstance().setStudentAttendance(studentList, lecture);
+        showList(studentList);
 
         progress.dismiss();
     }

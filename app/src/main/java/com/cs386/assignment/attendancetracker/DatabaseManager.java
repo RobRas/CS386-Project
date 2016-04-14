@@ -1,26 +1,18 @@
 package com.cs386.assignment.attendancetracker;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
 
-import java.io.BufferedInputStream;
+
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
-import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.text.Collator;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.ArrayList;
-import java.util.Random;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -109,14 +101,24 @@ public final class DatabaseManager {
         return studentList;
     }
 
-    public static ArrayList<Student> getStudentAttendance(ArrayList<Student> studentList, Lecture lecture) {
+    public void setStudentAttendance(ArrayList<Student> studentList, Lecture lecture) {
         // Call setAttendance on each student for the given lecture
-        Random random = new Random();
-        for (Student student : studentList) {
-            student.setAttendance(random.nextInt(5));
-        }
+        Thread t = new AccessDatabaseThread("select student_id, days_attended from student_enrollment where class_id = '" + lecture.getID() + "'");
+        t.start();
+        try {
+            t.join();
+        } catch (InterruptedException e) { }
+        String[] studentInfo = parseHTML(result);
 
-        return studentList;
+        for (Student student : studentList) {
+            for (int i = 1; i < studentInfo.length; i += 2) {
+                Log.d("Student ID", student.getID());
+                Log.d("studentInfo", studentInfo[i]);
+                if (student.getID().equals(studentInfo[i])) {
+                    student.setAttendance(Integer.parseInt(studentInfo[i+1]));
+                }
+            }
+        }
     }
 
     public static void incrementStudentAttendance(ArrayList<Student> studentList, Lecture lecture) {
