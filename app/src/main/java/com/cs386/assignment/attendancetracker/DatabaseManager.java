@@ -112,8 +112,6 @@ public final class DatabaseManager {
 
         for (Student student : studentList) {
             for (int i = 1; i < studentInfo.length; i += 2) {
-                Log.d("Student ID", student.getID());
-                Log.d("studentInfo", studentInfo[i]);
                 if (student.getID().equals(studentInfo[i])) {
                     student.setAttendance(Integer.parseInt(studentInfo[i+1]));
                 }
@@ -121,10 +119,14 @@ public final class DatabaseManager {
         }
     }
 
-    public static void incrementStudentAttendance(ArrayList<Student> studentList, Lecture lecture) {
+    public void incrementStudentAttendance(ArrayList<Student> studentList, Lecture lecture) {
         for (Student student : studentList) {
             if (student.getInAttendance()) {
-                // Increment student attendance in the database for the given lecture here
+                Thread t = new AccessDatabaseThread("update student_enrollment set days_attended = days_attended+1 where student_id = '" + student.getID() + "' and class_id = '" + lecture.getID() + "'");
+                t.start();
+                try {
+                    t.join();
+                } catch (InterruptedException e) { }
             }
         }
     }
