@@ -43,7 +43,6 @@ public class TrackingAttendanceActivity extends AppCompatActivity {
 
     private void checkAttendance() {
         progress.setMessage("Taking attendance...");
-
         for (Student student : studentList) {
             Thread t = new BluetoothThread(student);
             t.start();

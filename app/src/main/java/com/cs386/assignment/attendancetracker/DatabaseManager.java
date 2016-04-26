@@ -198,6 +198,7 @@ public final class DatabaseManager {
             this.query = this.query.replace(",", "%2C");
             this.query = this.query.replace("=", "%3D");
             this.query = this.query.replace(":", "%3A");
+            this.query = this.query.replace("+", "%2B");
         }
 
         @Override
