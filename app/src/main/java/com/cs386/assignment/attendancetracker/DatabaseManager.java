@@ -141,8 +141,8 @@ public final class DatabaseManager {
             } catch (InterruptedException e) { }
 
             String[] s = parseHTML(result);
-            for (int i = 3; i < s.length; i += 3) {
-                student.addMacAddress(s[i]);
+            for (int i = 1; i < s.length; i += 2) {
+                student.addMacAddress(s[i].toUpperCase());
             }
         }
     }
