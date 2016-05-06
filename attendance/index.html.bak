@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- HTML heavily inspired by http://blueimp.github.io/jQuery-File-Upload/ -->
+<html class="no-js" lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team Infinity</title>
+<style>
+	#file-target {
+		width:500px;
+		height:100px;
+		border:2px solid grey;
+	}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/normalize.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css">
+<link href='https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<!-- <scri`pt src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script> -->
+<!-- <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script> -->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="./dropzone/dropzone.js"></script>
+<script>
+    $(document).ready(function() {
+		$("#file-target").dropzone({ 
+			url: "./upload-target.php",
+			success: function(file, response) { alert(response); } 
+		});
+	});
+</script>
+</head>
+
+<body>
+<h1>
+	<p>
+  		Uploads instructors csv file into a postgres database.
+	</p>
+</h1>
+
+<!-- Change /upload-target to your upload address -->
+<form id="file-target">"Drop csv file here to upload"</form>
+<!-- <form action="./upload-target.php" class="dropzone"></form> -->
+<div class="table table-striped" class="files" id="previews">
+
+
+  <div id="template" class="file-row">
+    <!-- This is used as the file preview template -->
+    <div>
+        <span class="preview"><img data-dz-thumbnail /></span>
+    </div>
+    <div>
+        <p class="name" data-dz-name></p>
+        <strong class="error text-danger" data-dz-errormessage></strong>
+    </div>
+    <div>
+        <p class="size" data-dz-size></p>
+        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+        </div>
+    </div>
+    <div>
+      <button class="btn btn-primary start">
+          <i class="glyphicon glyphicon-upload"></i>
+          <span>Start</span>
+      </button>
+      <button data-dz-remove class="btn btn-warning cancel">
+          <i class="glyphicon glyphicon-ban-circle"></i>
+          <span>Cancel</span>
+      </button>
+      <button data-dz-remove class="btn btn-danger delete">
+        <i class="glyphicon glyphicon-trash"></i>
+        <span>Delete</span>
+      </button>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
